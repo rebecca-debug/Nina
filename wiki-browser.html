@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nina Powell Brand Wiki</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --bg-sidebar: #f6f6f6;
+    --border: #c8ccd1;
+    --text: #202122;
+    --text-muted: #54595d;
+    --link: #0645ad;
+    --link-visited: #0b0080;
+    --accent: #36c;
+    --table-stripe: #f8f9fa;
+    --table-border: #a2a9b1;
+    --code-bg: #f5f5f5;
+    --tag-bg: #eaecf0;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0; height: 100%;
+    background: var(--bg); color: var(--text);
+    font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+  }
+  #app { display: flex; height: 100vh; overflow: hidden; }
+
+  /* Sidebar */
+  #sidebar {
+    width: 280px; min-width: 280px;
+    background: var(--bg-sidebar);
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    padding: 16px 0 40px;
+  }
+  #sidebar .brand {
+    padding: 0 16px 14px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 12px;
+  }
+  #sidebar .brand h1 {
+    font-size: 16px; margin: 0 0 2px;
+    font-family: Georgia, "Times New Roman", serif;
+  }
+  #sidebar .brand .sub { font-size: 11px; color: var(--text-muted); }
+  #search-box {
+    margin: 0 16px 14px;
+  }
+  #search-box input {
+    width: 100%; padding: 6px 8px; font-size: 13px;
+    border: 1px solid var(--border); border-radius: 3px;
+    background: #fff;
+  }
+  .nav-meta {
+    padding: 0 16px; margin-bottom: 16px;
+  }
+  .nav-meta a {
+    display: block; font-size: 13px; padding: 4px 0;
+    color: var(--link); text-decoration: none;
+  }
+  .nav-meta a:hover { text-decoration: underline; }
+  .nav-category {
+    margin-bottom: 4px;
+  }
+  .nav-category > summary {
+    cursor: pointer; font-size: 12px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .04em;
+    color: var(--text-muted); padding: 6px 16px;
+    list-style: none; user-select: none;
+  }
+  .nav-category > summary::-webkit-details-marker { display: none; }
+  .nav-category > summary::before {
+    content: "▸ "; display: inline-block; width: 10px;
+  }
+  .nav-category[open] > summary::before { content: "▾ "; }
+  .nav-category ul { list-style: none; margin: 0; padding: 0 0 6px; }
+  .nav-category li a {
+    display: block; padding: 5px 16px 5px 30px; font-size: 13.5px;
+    color: var(--link); text-decoration: none; line-height: 1.3;
+  }
+  .nav-category li a:hover { background: #eaecf0; }
+  .nav-category li a.active { background: #e5edfa; font-weight: 600; }
+
+  /* Main content */
+  #main { flex: 1; overflow-y: auto; }
+  #content-wrap {
+    max-width: 820px; margin: 0 auto; padding: 36px 40px 100px;
+  }
+  .page-category-tag {
+    display: inline-block; font-size: 11px; text-transform: uppercase;
+    letter-spacing: .04em; background: var(--tag-bg); color: var(--text-muted);
+    padding: 3px 9px; border-radius: 10px; margin-bottom: 10px;
+  }
+  .page-path {
+    font-size: 12px; color: var(--text-muted); font-family: ui-monospace, monospace;
+    margin-bottom: 20px;
+  }
+  article {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 16.5px; line-height: 1.7; color: var(--text);
+  }
+  article h1 {
+    font-family: Georgia, serif; font-size: 30px; font-weight: 400;
+    border-bottom: 1px solid var(--border); padding-bottom: 8px;
+    margin: 0 0 20px;
+  }
+  article h2 {
+    font-size: 21px; font-weight: 400; border-bottom: 1px solid #eaecf0;
+    padding-bottom: 5px; margin: 32px 0 14px;
+  }
+  article h3 { font-size: 17.5px; font-weight: 700; margin: 24px 0 10px; }
+  article p { margin: 0 0 14px; }
+  article ul { margin: 0 0 14px; padding-left: 30px; }
+  article li { margin-bottom: 6px; }
+  article a { color: var(--link); text-decoration: none; }
+  article a:hover { text-decoration: underline; }
+  article a.missing-link { color: #ba0000; }
+  article strong { font-weight: 700; }
+  article em { font-style: italic; }
+  article code {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    background: var(--code-bg); padding: 1px 5px; border-radius: 3px; font-size: 14px;
+  }
+  article hr { border: none; border-top: 1px solid var(--border); margin: 28px 0; }
+  article table {
+    border-collapse: collapse; width: 100%; margin: 0 0 18px; font-size: 14.5px;
+    font-family: -apple-system, sans-serif;
+  }
+  article th, article td {
+    border: 1px solid var(--table-border); padding: 7px 10px; text-align: left;
+    vertical-align: top;
+  }
+  article th { background: #eaecf0; font-weight: 700; }
+  article tr:nth-child(even) td { background: var(--table-stripe); }
+  .footer-meta {
+    margin-top: 36px; padding-top: 14px; border-top: 1px solid var(--border);
+    font-family: -apple-system, sans-serif; font-size: 12.5px; color: var(--text-muted);
+  }
+  .toc-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4px 28px;
+    font-family: -apple-system, sans-serif; font-size: 14px; margin: 16px 0 28px;
+  }
+  .not-found { color: var(--text-muted); font-style: italic; }
+
+  @media (max-width: 760px) {
+    #sidebar { position: fixed; z-index: 10; height: 100%; transform: translateX(-100%); transition: transform .2s; }
+    #sidebar.open { transform: translateX(0); }
+    #content-wrap { padding: 20px; }
+    #menu-btn { display: inline-block !important; }
+  }
+  #menu-btn {
+    display: none; position: fixed; top: 10px; left: 10px; z-index: 11;
+    background: var(--bg); border: 1px solid var(--border); border-radius: 4px;
+    padding: 6px 10px; font-size: 14px; cursor: pointer;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #101418; --bg-sidebar: #16191d; --border: #33383d;
+      --text: #e8e6e3; --text-muted: #9aa0a6; --link: #7aa7ff;
+      --code-bg: #1c2024; --table-stripe: #161a1e; --table-border: #3a3f44;
+      --tag-bg: #22262b;
+    }
+    article th { background: #22262b; }
+    .nav-category li a:hover { background: #22262b; }
+    .nav-category li a.active { background: #1c2838; }
+  }
+</style>
+</head>
+<body>
+<button id="menu-btn" onclick="document.getElementById('sidebar').classList.toggle('open')">☰ Menu</button>
+<div id="app">
+  <nav id="sidebar">
+    <div class="brand">
+      <h1>Nina Powell Brand Wiki</h1>
+      <div class="sub">Living brand intelligence</div>
+    </div>
+    <div id="search-box"><input id="search-input" type="search" placeholder="Search articles…" oninput="renderNav(this.value)"></div>
+    <div class="nav-meta" id="nav-meta"></div>
+    <div id="nav-categories"></div>
+  </nav>
+  <main id="main"><div id="content-wrap"></div></main>
+</div>
+
+<script>
+const PAGES = {"home": {"title": "Wiki Index", "category": "meta", "raw": "# Wiki Index\n\nCatalog of every wiki article. One line each: link, summary, category, confidence,\nsource count, last updated. Regenerate this file in the same pass as any wiki\nchange — a stale index is worse than no index.\n\n| Article | Summary | Category | Confidence | Sources | Last updated |\n|---|---|---|---|---|---|\n| [identity/brand-core.md](identity/brand-core.md) | Brand name \"The Sovereign Reset,\" slogan, 4-Phase Sovereignty Protocol, positioning, tone; supersedes prior \"Unhinged Reclamation\" naming | identity | Low-medium | 4 | 2026-10-18 |\n| [audience/icp-primary.md](audience/icp-primary.md) | Primary ICP: midlife \"eldest daughter\" high-achievers seeking sovereign surrender (midlife attribute human-confirmed) | audience | Medium | 4 | 2026-10-18 |\n| [audience/congregation-points.md](audience/congregation-points.md) | Where the ICP gathers (Human Design, School of Somatic Leadership, Priestess masterminds) | audience | Low-medium | 1 | 2026-10-18 |\n| [market/competitive-landscape.md](market/competitive-landscape.md) | S-Factor & Lauren Harkness positioning, market gaps, \"boardroom to bedroom\" opportunity | market | Low-medium | 1 | 2026-10-18 |\n| [offers/the-sovereign-somaticist.md](offers/the-sovereign-somaticist.md) | Current offer: statement, benefits, use cases; no pricing/format yet | offers | Low-medium | 2 | 2026-10-18 |\n| [offers/the-unhinged-reclamation.md](offers/the-unhinged-reclamation.md) | Superseded offer concept, kept as historical context only | offers | Superseded | 2 | 2026-10-16 |\n| [voice/voice-guide.md](voice/voice-guide.md) | Tone (commanding/sophisticated), signature phrases, triggers; one verbatim Nina quote | voice | Low | 2 | 2026-10-18 |\n| [strategy/content-hooks.md](strategy/content-hooks.md) | 50 current AI-generated hook candidates, unvetted, no performance data | strategy | Low | 1 | 2026-10-18 |\n| [strategy/visual-brand-system.md](strategy/visual-brand-system.md) | 5-step AI prompt pipeline for logo/visual system, now carrying the current brand payload | strategy | Medium (process) | 1 | 2026-10-18 |\n| [proof/testimonials.md](proof/testimonials.md) | 17 real client testimonials cataloged with consent status; 3 audio/video sources pending transcription | proof | High (authenticity), consent unconfirmed on several | 3 + 3 pending | 2026-10-18 |\n", "path": "wiki/index.md"}, "log": {"title": "Wiki Log", "category": "meta", "raw": "# Wiki Log\n\nAppend-only. One entry per ingest, query, or lint pass:\n\n`## [YYYY-MM-DD] ingest|query|lint | <source or question> | Updated: article-a, article-b`\n\n## [2026-10-18] setup | Initial scaffold created from Brand Wiki pattern doc | Updated: none yet\n## [2026-10-18] ingest | market-intelligence-2026-10-16.md + ai-brand-system-prompt-pack-2026-10-16.md (filed to raw/research/) | Updated: identity/brand-core, audience/icp-primary, audience/congregation-points, market/competitive-landscape, offers/the-unhinged-reclamation, voice/voice-guide, strategy/content-hooks, strategy/visual-brand-system\n## [2026-10-18] ingest | market-intelligence-2026-10-18.md + ai-brand-system-prompt-pack-2026-10-18.md (filed to raw/research/) | Updated: identity/brand-core, audience/icp-primary, audience/congregation-points, market/competitive-landscape, offers/the-sovereign-somaticist (new), offers/the-unhinged-reclamation (marked superseded), voice/voice-guide, strategy/content-hooks, strategy/visual-brand-system — CONTRADICTION: 10-18 source replaces brand name (\"Unhinged Reclamation\" → \"Sovereign Reset\"/\"Sovereign Somaticist\"), method name, tone, audience framing (midlife-numbness → eldest-daughter/sovereignty), congregation points, and competitors wholesale rather than incrementally. Resolved in favor of 10-18 per recency rule; 10-16 material kept as superseded/historical only.\n## [2026-10-18] ingest | Testimonials folder (Client Testimonials 2019.docx.md, Testimonal for YPP.docx.md, S Testimonial.pdf filed to raw/testimonials/; Case Study 1 - Sonia.mp4, Lindsay retreat part.mov, Amanda.m4a filed but NOT transcribed — no audio/video tool available this session) | Updated: proof/testimonials (new), audience/icp-primary (added real-client demographic cross-check) | Note: consent-to-publish status varies per client — see consent table in proof/testimonials.md before any external use.\n## [2026-10-18] query | Rebecca confirmed \"midlife\" is correct for the ICP, responding to the real-client-data flag above | Updated: audience/icp-primary (midlife attribute restored as human-confirmed, overriding prior recency-based removal; flagged that congregation-points/competitive-landscape haven't been re-checked against this)\n", "path": "wiki/log.md"}, "about": {"title": "Brand Wiki — Schema & Operating Rules", "category": "meta", "raw": "# Brand Wiki — Schema & Operating Rules\n\nBusiness: Nina Powell. This is a separate wiki from Fantail Weddings — do not merge\nor cross-reference the two.\n\nThis project maintains a living brand wiki for the business above, following the\npattern in [`docs/brand-wiki-pattern.md`](docs/brand-wiki-pattern.md). You (the LLM)\nown the `wiki/` layer entirely. The human owns sourcing, review, and direction.\n\n## Layers\n\n- `raw/` — immutable source material (call transcripts, testimonials, notes, research).\n  Never edit files here. Sort new drops into the subfolder that matches what they are:\n  `sales-calls/`, `coaching-calls/`, `client-calls/`, `team-meetings/`, `interviews/`,\n  `notes/` (brain dumps, one-off context that isn't a call).\n- `wiki/` — the brand wiki itself. Markdown articles, organized by category:\n  - `identity/` — origin story, founder profile, positioning, values\n  - `audience/` — ICP profiles, language patterns, objections, success stories\n  - `offers/` — offer architecture, pricing, individual product/package pages\n  - `voice/` — voice guide, signature phrases, banned phrases, writing samples\n  - `proof/` — testimonials, case studies, metrics\n  - `market/` — competitive landscape, trends, content gaps\n  - `strategy/` — content strategy, funnel architecture, growth thesis\n  - `frameworks/` — proprietary methods and teaching frameworks\n  This is a starting scaffold, not a ceiling — create new articles or categories\n  when the content calls for it. If something comes up more than twice across\n  different sources, it probably deserves its own article.\n- `exports/` — condensed, regenerated-on-change summaries derived from the wiki\n  (e.g. `brand-context.md`, `voice-guide.md`, `icp-brief.md`). Never edit these by\n  hand; regenerate from the wiki.\n\n## First read on every session\n\nBefore answering a query, ingesting a source, or changing the wiki, read in order:\n1. `wiki/index.md` — catalog of every article with a one-line summary\n2. This file — the rulebook\n3. `wiki/log.md` — recent activity\n\nOnly after that, open the specific articles relevant to the task. Never crawl the\nwhole wiki — the index and log exist so you don't have to.\n\n## Ingest\n\nWhen a new source lands in `raw/`:\n1. **Classify before extracting.** Don't trust the filename. Read enough of the\n   content to classify it: sales call, coaching call, client delivery call, team\n   meeting, or interview/content recording. File it into the matching `raw/`\n   subfolder if it isn't already there. Each type contributes different\n   intelligence — sales calls → objections/buying triggers, coaching calls → ICP\n   language + proof points, client calls → delivery patterns, team meetings →\n   strategic decisions.\n2. Extract: ICP language, voice data, proof points, objections, framework\n   explanations, content signals — whatever's actually present.\n3. Update every wiki article the source touches. A single call can touch 10+\n   articles — that's expected, not a sign of over-filing.\n4. **Weight recency.** Where an older and newer source disagree on something\n   current (pricing, offers, positioning, ICP, tools), the newer source wins for\n   \"what the brand is and sells now.\" Treat sources from the last ~12 months as\n   primary; older sources as historical/origin-story context. Flag contradictions\n   in `wiki/log.md` and note how they were resolved.\n5. Regenerate `wiki/index.md` and append to `wiki/log.md` in the same pass —\n   never leave them stale.\n\nIf there's no source material yet, interview the human: ask about their business,\nclients, story, and methodology, one question at a time, and compile answers\nstraight into wiki articles.\n\n## Query\n\nAnswer from the relevant wiki articles. If the answer is itself worth keeping\n(a generated sales page, a competitive analysis, a content comparison), offer to\nfile it back into the wiki as a new article rather than letting it disappear into\nchat history.\n\n## Lint\n\nWhen asked to health-check the wiki, look for: contradictions between articles,\nstale claims superseded by newer sources, orphan articles with no inbound links,\nrepeated concepts that lack their own page, offers without supporting proof points,\nand voice-guide claims that don't match recent call transcripts. Report a health\nscore and concrete fixes.\n\n## Indexing & logging conventions\n\n- `wiki/index.md`: one line per article — link, one-line summary, category,\n  confidence level, source count, last updated. Dense enough to read in one pass.\n- `wiki/log.md`: append-only, chronological. Format:\n  `## [YYYY-MM-DD] ingest|query|lint | <source or question> | Updated: article-a, article-b`\n- Regenerate/append both as part of the same operation that changes the wiki —\n  never as separate housekeeping.\n", "path": "CLAUDE.md"}, "identity/brand-core": {"title": "Brand Core — The Sovereign Reset", "category": "identity", "raw": "# Brand Core — The Sovereign Reset\n\n**Confidence:** Low-medium (AI-synthesized market intelligence; not yet validated against real client calls or shipped copy).\n\n## Brand / campaign name\n**The Sovereign Reset** — current working name (as of 2026-10-18).\n\n## Offer / method name\n**The Sovereign Somaticist** — the offer entity itself (distinct from the campaign name above). See [offers/the-sovereign-somaticist.md](../offers/the-sovereign-somaticist.md).\n\n## Core idea / main slogan\n\"Reclaiming your body as the ultimate boardroom for your life.\"\n\n## Unique method\n**The 4-Phase Somatic Sovereignty Protocol** — named but not yet described. The actual 4 phases still need to be documented, ideally via interview or call transcript — see [frameworks/](../frameworks/).\n\n## Positioning\n- **\"Somatic Mentor for the Sovereign Woman\"** — bridging the boardroom and the bedroom.\n- Market gap being claimed: the intersection of high-level business/leadership and deep, raw somatic/pelvic bodywork — a brand that feels \"glamorous/powerful\" rather than \"ethereal/soft.\" See [market/competitive-landscape.md](../market/competitive-landscape.md).\n- \"Nina Powell = Power\" visual identity is meant to attract women who want to be powerful, not just \"healed.\"\n\n## Tone\nCommanding, sophisticated, sharp, and deeply grounded.\n\n## Visual identity direction\nNot yet built. See [strategy/visual-brand-system.md](../strategy/visual-brand-system.md) for the AI prompt pack designed to generate it (now updated with this brand's wording).\n\n## Naming history (superseded)\nAs of the 2026-10-16 source, the brand/campaign was named **\"The Unhinged Reclamation,\"** with core idea \"Giving you permission to stop performing and start existing,\" unique method \"The Somatic Unmasking Protocol,\" and a \"raw, punchy, fiercely liberating\" tone. The 2026-10-18 source replaces all of this outright — not an elaboration, a different name, slogan, method name, and tone register (commanding/sophisticated vs. raw/punchy). Treating 10-18 as current per the wiki's recency rule. If this was an intentional pivot, no action needed; if \"The Unhinged Reclamation\" was supposed to persist alongside this, flag it so both can be reconciled.\n\n---\n**Sources:** `raw/research/market-intelligence-2026-10-18.md`, `raw/research/ai-brand-system-prompt-pack-2026-10-18.md` (2026-10-18); superseded: 2026-10-16 versions of both\n**Last updated:** 2026-10-18 (second ingest)\n", "path": "wiki/identity/brand-core.md"}, "audience/congregation-points": {"title": "Audience Congregation Points", "category": "audience", "raw": "# Audience Congregation Points\n\nWhere the [primary ICP](icp-primary.md) already gathers — useful for content distribution and partnership/guest-appearance targeting.\n\n**Confidence:** Low-medium (AI-synthesized market research, not yet validated).\n\n## Tier 1 — Mainstream\n- **Human Design** (Instagram/YouTube, millions) — many in this audience use Human Design (especially the Projector type) to explain their \"different\" way of operating.\n\n## Tier 2 — Niche\n- **The School of Somatic Leadership for Women** (website/community) — directly addresses the intersection of leadership and body-based wisdom. Example topics: leading from the body; nervous system regulation for high-stakes roles.\n- **Substack (embodiment/grief/grace niche)** — high-quality, long-form writing is where this audience goes to feel \"seen.\" Example topics: the death of the old identity; reclaiming the feminine psyche.\n\n## Tier 3 — Micro\n- **Private \"Priestess\" or \"Embodiment\" masterminds** (Skool/Discord) — small, high-ticket containers where they can be vulnerable away from their public \"competent\" persona. Access usually via referral or high-ticket application.\n\n## Superseded (2026-10-16, historical)\nThe prior source listed entirely different congregation points — Brené Brown, The School of Life, r/menopause, The Embodiment Conference, and \"Midlife\" Substack newsletters — tied to the earlier midlife-framed persona. See [icp-primary.md](icp-primary.md#evolution-note-contradiction-flagged-per-claudemd-recency-rule) for why this changed. Kept here for reference only; not current.\n\n---\n**Sources:** `raw/research/market-intelligence-2026-10-18.md` (2026-10-18); superseded: `raw/research/market-intelligence-2026-10-16.md`\n**Last updated:** 2026-10-18 (second ingest)\n", "path": "wiki/audience/congregation-points.md"}, "audience/icp-primary": {"title": "ICP — Primary Audience", "category": "audience", "raw": "# ICP — Primary Audience\n\n**Confidence:** Medium. The \"midlife\" attribute is **confirmed directly by Nina** (via Rebecca, 2026-10-18) — this overrides the earlier recency-based assumption that the 10-18 source's silence on midlife superseded it. The rest (eldest-daughter framing, sovereignty/surrender language, pain points, hooks) remains AI-synthesized market research, unvalidated against real sales/coaching calls.\n\n## Who they are\nConfirmed: **women in midlife** is a correct, load-bearing part of this ICP — not an artifact of the superseded 2026-10-16 source. Combine with the 2026-10-18 first-person description below; both are true simultaneously, not competing framings.\n\n\"My clients are like me — highly driven. Eldest daughters. Highly independent. Intelligent. Capable. High-functioning. Carry the load financially for much of their life. Left home early. Have a lot of the need to be in charge and control things. But they desire submission and being taken by a man. Surrender. They have a lot of go-go-go in them and their nervous system. Probably don't call it anxiety but it does have a tight muscular tension or tightness in them. They see a woman — me, perhaps — on the other side of the room, and want what she has: this feminine essence or magnetism, the way she moves, the glamorous wild woman, beautiful and alluring.\" — Nina, verbatim via the market-intelligence tool input.\n\n## Transformation journey\n**Current state:** \"High-functioning exhaustion.\" The \"eldest daughter\" archetype — hyper-competent, financially independent, perpetually in control. A cycle of over-performing, over-thinking, and \"keeping it together\" while the nervous system stays in chronic, low-grade contraction. Disconnected from their own body — it's a tool to manage, not an oracle to hear. Successful on paper, but a hollow ache for \"more\" — a desire to stop editing themselves and finally surrender.\n\n**Desired state:** To move from \"survival\" to \"aliveness.\" To drop the armor, trust instinctual intelligence, inhabit their body with ease. To experience deep, unedited pleasure and sexual vitality, and the freedom to be \"seen\" without performing. To reach \"sovereign surrender\" — powerful enough to let go, trust their own desires as a compass, and live a life that's truly, unapologetically theirs.\n\n## Core problem (urgency gateway)\n**Chronic nervous system \"armouring\"** and the inability to switch off \"go-go-go\" survival mode.\n\n**Why it's urgent now:** Their old strategies — control, intellect, hard work — are stopping working, leading to burnout, physical tension, and a growing existential emptiness that now threatens their professional and personal success.\n\n**Failed solutions they've already tried:**\n- Traditional talk therapy — too intellectual, doesn't address the body\n- Standard \"hustle\" productivity hacks\n- Generic self-care routines that feel like another chore\n- Over-analyzing their own psychology without somatic release\n\n## Pain points\n| Pain | Severity | Voice |\n|---|---|---|\n| \"Eldest daughter\" burnout cycle — resentment mixed with being trapped by their own competence | Critical | \"I feel like I'm the project manager of my own life, and I'm exhausted by the person in charge.\" |\n| Inability to surrender or be vulnerable — fear that letting go of control means everything falls apart | Critical | \"I want to be taken care of, but I don't know how to stop being the one who takes care of everyone else.\" |\n| Physical numbness/disconnection — a \"head on a stick\" rather than a whole person | Moderate | \"I feel like I'm living in my head and my body is just a vehicle I'm dragging around.\" |\n| \"Good Girl\" performance trap — feeling like a fraud, constant self-editing | Moderate | \"I'm so tired of performing 'competent woman' for the world. I just want to be real.\" |\n| Chronic muscular tension/tightness — the physical cost of \"holding it all together\" | Low | \"My shoulders are permanently up to my ears. I don't even know what it feels like to be relaxed.\" |\n\n## Language map\n**Pain phrases:** holding it all together, head on a stick, always in control, the weight of the world, numb to my own needs, performing my life\n\n**Desire phrases:** fully alive, sovereign surrender, body as oracle, stop editing myself, visceral pleasure, wild intelligence\n\n**Search phrases (by demand):**\n- \"how to stop being the strong one\" — high\n- \"somatic healing for high achievers\" — medium\n- \"feminine embodiment practices for burnout\" — medium\n\n**Emotional triggers:** aliveness, permission, sovereignty, instinct, magnetism, unapologetic\n\n## Objections\nNot yet captured from real sales calls. The \"failed solutions\" above are the closest proxy, not objections to this specific offer. Revisit once real sales-call transcripts land in `raw/sales-calls/`.\n\n## Where they congregate\nSee [congregation-points.md](congregation-points.md).\n\n## Real client data point\n[proof/testimonials.md](../proof/testimonials.md) includes demographic detail from actual testimonials (ages 29/31, mothers of infants, 7-9 year relationships) that reads younger than \"midlife\" on its face. Nina has since confirmed midlife is correct for the ICP overall — these particular testimonials may be early-career clients, outliers, or \"midlife\" may be a broader band than strictly 40s-50s. Not a contradiction to resolve further unless more data suggests otherwise.\n\n## Correction log\n- **2026-10-18 (human-confirmed):** Nina confirmed the \"midlife\" framing is correct, overriding the note below — the 2026-10-18 source's silence on midlife was a gap in that source, not evidence the attribute had changed. Human confirmation takes priority over the recency heuristic.\n- **2026-10-18 (superseded reasoning, kept for audit trail):** The 2026-10-16 source described this audience generically as \"women in midlife\" experiencing \"high-functioning numbness,\" with different pain points (the Void, loss of sexual vitality framed around menopause/midlife) and different congregation points (Brené Brown, r/menopause, The Embodiment Conference). The 2026-10-18 source reframed the same persona through the sharper \"eldest daughter / sovereignty / control-vs-surrender\" lens, in Nina's own words, with no midlife/menopause framing at all — at the time this read as the 10-18 source wholesale replacing the 10-16 framing, including dropping \"midlife.\" That specific inference was wrong. \"Performing my life\" (pain) and \"fully alive\" (desire) persisted across both sources and remain a durable signal. Congregation points and competitors below still reflect the 10-18 (\"eldest daughter/sovereignty\") lens only — not yet re-examined against the confirmed midlife attribute (e.g. whether r/menopause and The Embodiment Conference from the 10-16 source should return to [congregation-points.md](congregation-points.md)).\n\n---\n**Sources:** `raw/research/market-intelligence-2026-10-18.md`, `raw/research/ai-brand-system-prompt-pack-2026-10-18.md` (2026-10-18), Nina/Rebecca direct confirmation (2026-10-18); superseded: 2026-10-16 versions of both market-intelligence docs (midlife attribute specifically un-superseded by human confirmation)\n**Last updated:** 2026-10-18 (third ingest — correction)\n", "path": "wiki/audience/icp-primary.md"}, "offers/the-sovereign-somaticist": {"title": "Offer — The Sovereign Somaticist", "category": "offers", "raw": "# Offer — The Sovereign Somaticist\n\nCurrent offer, as of the 2026-10-18 source. Supersedes [the-unhinged-reclamation.md](the-unhinged-reclamation.md) (2026-10-16).\n\n**Confidence:** Low-medium (AI-synthesized market research; working offer concept, not yet confirmed as a sold/priced product). No pricing, delivery format, or duration is specified anywhere in the source material.\n\n## Offer statement\n\"For the high-achieving woman who is tired of performing her life, The Sovereign Somaticist is the nervous system reset that replaces chronic armouring with instinctual power so you can finally stop editing yourself and start living with total, unapologetic aliveness.\"\n\n## Unique method\n**The 4-Phase Somatic Sovereignty Protocol** — named but not yet described. The actual 4 phases still need documenting, ideally via interview or call transcript — see `wiki/frameworks/`.\n\n## Benefits\n- A visceral nervous system reset that dissolves the physical tension of holding it all together\n- A toolkit to identify and release \"Good Girl\" performance patterns in real time\n- The ability to distinguish between anxious overthinking and true instinctual intelligence\n- A sustainable way to maintain high-level success without the burnout cycle\n\n## Use cases\n- Stop the \"head on a stick\" feeling and ground yourself before high-stakes meetings\n- Set boundaries that protect your peace without the usual guilt or self-editing\n- Transition from constant survival to magnetic, embodied flow\n- Reclaim the energy currently spent managing everyone else's needs\n\n## Hidden benefits\n- Increased capacity for deep, unedited pleasure and sexual vitality\n- A profound shift in personal relationships as the need to be the \"responsible one\" dissolves\n- The ability to make decisions with gut-level clarity rather than agonizing over every outcome\n\n## Open questions (not in source material)\n- Price and payment structure\n- Delivery format (1:1, group, course, live, self-paced) and duration\n- Where this sits relative to any other offers Nina may already run\n- Whether \"The Sovereign Reset\" (campaign name) and \"The Sovereign Somaticist\" (offer name) are meant to be distinct, or the same thing named two ways\n\n---\n**Sources:** `raw/research/market-intelligence-2026-10-18.md`, `raw/research/ai-brand-system-prompt-pack-2026-10-18.md` (2026-10-18)\n**Last updated:** 2026-10-18 (second ingest)\n", "path": "wiki/offers/the-sovereign-somaticist.md"}, "offers/the-unhinged-reclamation": {"title": "Offer — The Unhinged Reclamation (superseded)", "category": "offers", "raw": "# Offer — The Unhinged Reclamation (superseded)\n\n**Status: superseded as of 2026-10-18** — the 2026-10-18 source replaced this offer concept with [The Sovereign Somaticist](the-sovereign-somaticist.md). Kept here as historical context per the wiki's recency rule, not as current reality.\n\n**Confidence:** Low-medium (AI-synthesized market research; working offer concept, not yet confirmed as a sold/priced product). No pricing, delivery format, or duration is specified anywhere in the source material.\n\n## Offer statement\n\"For the high-achieving woman who feels like a ghost in her own life, The Unhinged Reclamation is the somatic path to dropping the 'Good Girl' mask and finally inhabiting a life that feels as vibrant as it looks.\"\n\n## Unique method\n**The Somatic Unmasking Protocol** — named but not yet described. The actual steps/structure of the method still need to be documented, ideally in `wiki/frameworks/` once Nina articulates it (interview or call transcript).\n\n## Benefits\n- A somatic toolkit to identify and release the physical tension of \"performing\" your life\n- Permission to stop editing your personality to fit boxes that no longer serve you\n- A proven method to reconnect with your body and reclaim dormant erotic vitality\n- The ability to trust your intuition as an oracle rather than second-guessing every decision\n\n## Use cases\n- Set boundaries that make others uncomfortable without guilt\n- Stop saying yes to obligations that drain your life force\n- Make decisions from internal truth instead of external expectations\n- Transform daily routine from chores into a ritual of self-belonging\n\n## Hidden benefits\n- Radical improvement in intimate relationships as you stop playing a character\n- Disappearance of imposter syndrome that comes from a life that doesn't fit\n- A magnetic presence that draws the right people and opportunities\n\n## Open questions (not in source material)\n- Price and payment structure\n- Delivery format (1:1, group, course, live, self-paced) and duration\n- Where this sits relative to any other offers Nina may already run\n\n---\n**Sources:** `raw/research/market-intelligence-2026-10-16.md`, `raw/research/ai-brand-system-prompt-pack-2026-10-16.md` (2026-10-16)\n**Last updated:** 2026-10-18\n", "path": "wiki/offers/the-unhinged-reclamation.md"}, "voice/voice-guide": {"title": "Voice Guide", "category": "voice", "raw": "# Voice Guide\n\n**Confidence:** Low (derived from AI-synthesized market research and campaign copy, not from Nina's own writing samples or call recordings — treat as a starting hypothesis, not a confirmed voice). The 2026-10-18 source does include one verbatim first-person passage from Nina describing her audience — see [audience/icp-primary.md](../audience/icp-primary.md) — which is a stronger voice signal than anything else ingested so far.\n\n## Tone\nCommanding, sophisticated, sharp, and deeply grounded.\n\n## Signature phrases — pain\nholding it all together, head on a stick, always in control, the weight of the world, numb to my own needs, performing my life\n\n## Signature phrases — desire\nfully alive, sovereign surrender, body as oracle, stop editing myself, visceral pleasure, wild intelligence\n\n## Emotional triggers to write toward\naliveness, permission, sovereignty, instinct, magnetism, unapologetic\n\n## Core slogan / line\n\"Reclaiming your body as the ultimate boardroom for your life.\"\n\n## Banned / avoid\nNot yet defined by Nina. Based on the research's explicit market gap, avoid:\n- Clinical/medical framing (\"disorder,\" \"crisis\" used diagnostically)\n- Generic self-help \"hacks\" language\n- Vague, guru-sounding copy (flagged explicitly in the AI brand system prompt pack as something to avoid)\n- \"Ethereal/soft\" framing — the current positioning explicitly wants \"glamorous/powerful\" instead\n\n## Writing samples\nNone yet beyond the one verbatim audience passage noted above. The \"content hooks\" in [strategy/content-hooks.md](../strategy/content-hooks.md) are AI-generated hook candidates, not confirmed Nina voice.\n\n## Evolution note\nTone shifted materially between ingests: \"raw, punchy, fiercely liberating\" (2026-10-16) → \"commanding, sophisticated, sharp, deeply grounded\" (2026-10-18). Only \"performing my life\" (pain) and \"fully alive\" (desire) persisted as phrases across both. Treating 10-18 as current per the recency rule.\n\n---\n**Sources:** `raw/research/market-intelligence-2026-10-18.md`, `raw/research/ai-brand-system-prompt-pack-2026-10-18.md` (2026-10-18); superseded: 2026-10-16 versions of both\n**Last updated:** 2026-10-18 (second ingest)\n", "path": "wiki/voice/voice-guide.md"}, "proof/testimonials": {"title": "Testimonials", "category": "proof", "raw": "# Testimonials\n\nReal client testimonials, compiled from written documents. This is the strongest\nvoice signal ingested so far — unlike the AI-generated market intelligence in\n[audience/icp-primary.md](../audience/icp-primary.md) and\n[strategy/content-hooks.md](../strategy/content-hooks.md), these are actual client\nwords, collected directly by Nina.\n\n**Confidence:** High for authenticity (real client writing); unconfirmed for public-use rights on several entries — see the Consent column, and resolve before publishing any name externally.\n\n## Consent note — read before using any of this externally\nSource documents mix clients who explicitly granted name-use permission, clients\nwho explicitly asked to stay anonymous, and clients with no stated preference\neither way. Where a document doesn't say, **do not assume permission to publish a\nreal name** — confirm with Nina first. Initials, first-name-only, or \"Anonymous\"\nlabels in the sources may reflect the client's own choice of how much to reveal,\nnot a lack of a full name on file.\n\n## Catalog\n\n| Client | Consent | Theme | Representative line |\n|---|---|---|---|\n| Sonia (Wild Queen Retreat) | Named, permission noted in source | Trauma release via somatic/dance work; grief (stepfather's death, divorce) | \"I danced and danced and shook it all out... I felt I had finally arrived.\" |\n| Sonia (program graduate) | Named, permission noted in source | Shame/guilt release around self-pleasure; partner intimacy | \"Thanks to Nina I have realised the beauty in self love... this has rippled through other aspects of my life.\" |\n| Fanny | Named, permission noted in source | Sexual trauma release; authenticity; confidence | \"I found my power, my balance and my sensuality... THANK YOU NINA.\" |\n| Lauren Haynes-Debrasic | Name on file, but labeled \"Anonymous\" in source — treat as anonymous-only | Somatic work effectiveness; career/social confidence; subconscious integration | \"The work blows my mind, I love it... You and your work have been a gift.\" |\n| Tui | Explicitly \"Anonymous please\" | First experience of partnered pleasure after lifelong inability | \"I totally recommend the experience!!\" |\n| I.B. (leadership coach for CEOs, international) | Initials only in source | Femininity, power, and vulnerability as a leader; relationship responsibility shift | \"Developing your power, presence, passion and pleasure... what a promise!\" |\n| Anonymous (x2, undifferentiated) | Anonymous | Renewed sense of self / sexual confidence post-work | \"I feel freer in my sexuality... my body is capable of more than I ever realised.\" |\n| Beth | No stated preference — confirm before use | First experience of deep/satisfying orgasm; body confidence | \"I have learned how to give myself whole body, mind blowing orgasms.\" |\n| Francesca (mother, 1yo, Otago NZ, 9yr relationship) | No stated preference — confirm before use | Marital/intimate relationship transformation; orgasm frequency | \"My love life with my husband has improved dramatically... my body responds so fast!\" |\n| Emma (mother, 6mo, Dunedin NZ, 7yr relationship) | No stated preference — confirm before use | Postpartum/birth-trauma somatic healing (episiotomy scar) | \"You helped me to realise and understand the huge trauma the vagina goes through during birth.\" |\n| Nicky (UK) | Named, no explicit permission statement — confirm before use | Rebuilding sexual self + relationship communication after feeling \"stuck\" | \"I finally know what my body wants and can satisfy those needs.\" |\n| Unnamed narrative (long-form, written for an article) | Anonymous by context (no name given; author offered to be interviewed further) | Full-arc transformation story: isolation → somatic breakthroughs → embodied confidence | \"Nina changed my life. The work Nina does changes lives.\" |\n| Jen | Named, no explicit permission statement — confirm before use | Resilience through loss (horses, relationship ending) via sexual-energy awareness | \"I have been able to acknowledge these things and still stay in a good space.\" |\n| Christabel | Named, no explicit permission statement — confirm before use | Group-program format value; permission to prioritize pleasure | \"Nina is an amazing coach, professional, authentic and wise.\" |\n| Hana | Named, no explicit permission statement — confirm before use | Deepened body awareness beyond the sexual; processing grief over self-neglect | \"This has allowed me to reach heightened levels of confidence, understanding and power within myself.\" |\n| Jane | Named, no explicit permission statement — confirm before use | Creative unblocking; group vulnerability as unexpected highlight | \"I feel energized and empowered to be in my life, to go after what I want with less hesitation.\" |\n| \"S.\" (unidentified, PDF source) | Unknown — name not given in document | Clarity/calm replacing confusion; marriage reconnection; business decision-making confidence | \"My whole world has opened up... there is a much bigger everything that I am a part of.\" |\n\n## Recurring themes across testimonials\n- Shame/guilt release around self-pleasure and sexuality\n- First or renewed access to orgasm, including orgasm via intercourse (not just masturbation)\n- Somatic/body-based processing of grief and trauma (bereavement, divorce, birth trauma)\n- Increased confidence and clarity carrying over into career/business decisions\n- Improved partner intimacy and communication\n- Group-program format specifically valued for shared vulnerability, not just individual technique\n\n## Cross-check against market intelligence\nDemographic detail actually present here (ages 29 and 31, mothers of infants, 7-9 year relationships) skews **younger than the \"midlife\" framing** in the superseded 2026-10-16 market-intelligence source, and sits more comfortably alongside the current \"high-achieving woman\" framing (not explicitly age-pinned) in [audience/icp-primary.md](../audience/icp-primary.md). Worth confirming with Nina whether her actual client base skews early-30s rather than midlife.\n\n## Pending — not yet transcribed\nThree sources are filed in `raw/testimonials/` but not yet processed into this article — no audio/video transcription tool was available this session:\n- `Case Study 1 - Sonia.mp4`\n- `Lindsay retreat part.mov`\n- `Amanda.m4a`\n\nOnce transcribed (manually, or with a transcription tool), re-ingest to add Sonia's full case study, the Lindsay retreat segment, and Amanda's testimonial.\n\n---\n**Sources:** `raw/testimonials/Client Testimonials 2019.docx.md`, `raw/testimonials/Testimonal for YPP.docx.md`, `raw/testimonials/S Testimonial.pdf` (undated)\n**Last updated:** 2026-10-18\n", "path": "wiki/proof/testimonials.md"}, "market/competitive-landscape": {"title": "Competitive Landscape", "category": "market", "raw": "# Competitive Landscape\n\n**Confidence:** Low-medium (AI-synthesized market research, not yet validated).\n\n## S-Factor\n- **Positioning:** Feminine movement and pole dance as a path to embodiment\n- **Strengths:** Strong community; clear methodology\n- **Weaknesses:** Can feel superficial to those seeking deep psychological work\n- **Audience complaint:** \"It's a bit too focused on the physical dance and not enough on the psychological depth.\" (online forum)\n\n## Lauren Harkness\n- **Positioning:** High-integrity, wisdom-based mentorship\n- **Strengths:** High trust; sophisticated structure\n- **Weaknesses:** Lacks a specific pelvic/somatic bodywork focus\n- **Audience complaint:** \"Hard to get into her programs, they sell out instantly.\" (social media comment)\n\n## Market gaps\n- The intersection of high-level business/leadership and deep, raw somatic/pelvic bodywork.\n- A brand that feels \"glamorous/powerful\" rather than \"ethereal/soft.\"\n\n## Positioning opportunities\n- Position as the **\"Somatic Mentor for the Sovereign Woman\"** — bridging the boardroom and the bedroom.\n- Use the \"Nina Powell = Power\" visual identity to attract women who want to be powerful, not just \"healed.\" See [identity/brand-core.md](../identity/brand-core.md).\n\n## Superseded (2026-10-16, historical)\nThe prior source named different competitors — Dr. Shefali Tsabary (conscious parenting/awakening) and Esther Perel (relational intelligence/desire) — with market gaps framed around \"erotic vitality + somatic psychology\" and \"midlife as initiation.\" Kept for reference only; not current. See [identity/brand-core.md](../identity/brand-core.md) for the naming/positioning shift this tracks.\n\n---\n**Sources:** `raw/research/market-intelligence-2026-10-18.md` (2026-10-18); superseded: `raw/research/market-intelligence-2026-10-16.md`\n**Last updated:** 2026-10-18 (second ingest)\n", "path": "wiki/market/competitive-landscape.md"}, "strategy/content-hooks": {"title": "Content Hooks — The Sovereign Reset / The Sovereign Somaticist", "category": "strategy", "raw": "# Content Hooks — The Sovereign Reset / The Sovereign Somaticist\n\nAI-generated hook candidates for the [primary ICP](../audience/icp-primary.md), scored \"loved\" by the source research tool. Draw from these for social/content, but run them past Nina's actual voice before shipping — see [voice/voice-guide.md](../voice/voice-guide.md).\n\n**Confidence:** Low (AI-generated candidates, unvetted by Nina, no performance data yet).\n\n## Hooks\n- You are the project manager of your own life, and you are exhausted by the person in charge.\n- Stop treating your body like a vehicle you drag around to get things done.\n- Your nervous system is screaming for a break, but you keep giving it more to-do lists.\n- You feel like a head on a stick, disconnected from everything below your neck.\n- Holding it all together is exactly what is tearing you apart.\n- You are so busy performing your life that you have forgotten how to inhabit it.\n- The weight of the world is not yours to carry, yet you refuse to put it down.\n- You are numb to your own needs because you are too busy managing everyone else's.\n- Your 'go-go-go' survival mode is not a personality trait, it is a trauma response.\n- You are terrified that if you stop controlling everything, it will all fall apart.\n- Your morning routine is not the problem, your inability to be still is.\n- Stop trying to 'fix' your psychology and start listening to your biology.\n- Productivity is not a virtue when it is fueled by nervous system dysregulation.\n- You don't need more discipline, you need more permission to be human.\n- The 'strong one' is usually the most fragile person in the room.\n- Your intellect is the last thing you should trust right now.\n- Self-care is not a bubble bath, it is the ability to set a boundary that makes people uncomfortable.\n- You are not burnt out because you work too hard, you are burnt out because you are not present.\n- Stop trying to 'balance' your life and start reclaiming your sovereignty.\n- Your ambition is not the enemy, your disconnection from your body is.\n- The secret to high-level leadership that nobody talks about.\n- Why the most successful people I know work less than you do.\n- I stopped editing myself, and my business doubled. Here is what happened.\n- The one physical sensation you are ignoring that is costing you thousands.\n- What happens when you finally stop being the one who takes care of everyone else?\n- The anatomy of surrender: why it is the hardest thing you will ever do.\n- Why your body is smarter than your MBA.\n- The missing link between your professional success and your personal emptiness.\n- How to feel safe in your own body for the first time in years.\n- The reason you can't switch off at night is not your brain, it is your nervous system.\n- For the eldest daughter who is tired of being the 'responsible one'.\n- If you feel like a fraud in your own business, read this.\n- To the high achiever who has forgotten how to play.\n- If you are the person everyone comes to for answers, who do you go to?\n- For the overthinkers who are ready to feel something real.\n- You are not a machine, even if you have been acting like one.\n- To the woman who is tired of being 'strong' and wants to be 'alive'.\n- If you have mastered your career but lost your connection to yourself.\n- For the perfectionist who is ready to be messy.\n- You are a sovereign being, not a project manager for your own existence.\n- Last year I was burnt out. This year I work 4 hours a day and feel more powerful than ever.\n- What changed when I stopped chasing clients and started inhabiting my body.\n- I went from 'head on a stick' to fully alive. Here is the bridge.\n- How I learned to stop being the one who takes care of everyone else.\n- The moment I realized my body was my greatest business asset.\n- I stopped trying to control the outcome and started trusting my instinct.\n- How I reclaimed my time by regulating my nervous system.\n- From chronic armouring to magnetic presence: my journey.\n- I finally stopped performing my life and started living it.\n- How I found my voice by listening to my body.\n\n## Note\nThe source also tracked a \"Liked\" tier for lower-conviction hooks — it came back empty, nothing to file.\n\n## Superseded (2026-10-16, historical)\nA prior set of 50 hooks existed under the earlier \"Unhinged Reclamation\" brand name and midlife framing. Preserved only in `raw/research/market-intelligence-2026-10-16.md`; not reproduced here since the brand voice has moved on.\n\n---\n**Sources:** `raw/research/market-intelligence-2026-10-18.md` (2026-10-18); superseded: `raw/research/market-intelligence-2026-10-16.md`\n**Last updated:** 2026-10-18 (second ingest)\n", "path": "wiki/strategy/content-hooks.md"}, "strategy/visual-brand-system": {"title": "Visual Brand System — AI Generation Pipeline", "category": "strategy", "raw": "# Visual Brand System — AI Generation Pipeline\n\nA ready-to-use prompt pack (`raw/research/ai-brand-system-prompt-pack-2026-10-18.md`) for generating Nina Powell's visual identity through an image-generation AI, built from the same market intelligence behind [identity/brand-core.md](../identity/brand-core.md) and [offers/the-sovereign-somaticist.md](../offers/the-sovereign-somaticist.md). The pipeline itself (5 prompts, run in order) is unchanged from the 2026-10-16 version — only the brand payload fed into it changed (new name, slogan, method, tone). An earlier copy of the pack exists at `raw/research/ai-brand-system-prompt-pack-2026-10-16.md` under the superseded \"Unhinged Reclamation\" name — use the 10-18 version.\n\n**Confidence:** Medium for the process (it's a concrete, reusable pipeline); low for any visual output, since nothing has been generated yet.\n\n## Pipeline (5 prompts, run in order)\n1. **Style Extraction** — feed 1-3 design references (Pinterest, websites, ads) to extract a visual brand board: palette, typography, image/composition logic, signature device, grid system.\n2. **Brand Adaptation** — reuses that board's exact layout/system, swaps in Nina's wording (brand name, slogan, hooks, section labels) without changing the visual world.\n3. **Logo / Wordmark** — 4 wordmark options, 4 marks/monograms, 2 lockups, black/white/accent versions, one recommended direction.\n4. **Brand Design System** — turns the chosen logo + campaign board into a reusable system: social templates, carousel covers, ad creative, website hero direction, do/don't examples.\n5. **Website Hero** — a conversion-focused 16:9 hero section (headline, subhead, CTAs, trust strip) ready to hand to a developer.\n\n## Explicit guardrails baked into the prompts\nAvoid: full redesign/new art direction when adapting, generic AI slop, stock-template branding, text-heavy strategy documents, overcrowded layouts, vague or guru-sounding copy.\n\n## Status\nNot yet run. The full prompt text lives in the raw source — pull from there verbatim when ready to execute rather than retyping from this summary.\n\n---\n**Sources:** `raw/research/ai-brand-system-prompt-pack-2026-10-16.md` (2026-10-16)\n**Last updated:** 2026-10-18\n", "path": "wiki/strategy/visual-brand-system.md"}};
+const CATEGORY_LABELS = {"identity": "Identity", "audience": "Audience", "offers": "Offers", "voice": "Voice", "proof": "Proof", "market": "Market", "strategy": "Strategy", "frameworks": "Frameworks"};
+const CATEGORY_ORDER = ["identity", "audience", "offers", "voice", "proof", "market", "strategy", "frameworks"];
+
+function escapeHtml(s) {
+  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+function inline(text) {
+  text = escapeHtml(text);
+  text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
+  text = text.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+  text = text.replace(/(^|[^*])\*([^*\n]+)\*(?!\*)/g, '$1<em>$2</em>');
+  text = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(_, label, url) {
+    if (/^https?:\/\//.test(url)) {
+      return '<a href="' + url + '" target="_blank" rel="noopener">' + label + '</a>';
+    }
+    // relative wiki link -> resolve against PAGES by filename stem
+    const clean = url.split('#')[0].replace(/^\.\.\//, '').replace(/^\.\//, '');
+    const stem = clean.replace(/\.md$/, '');
+    let targetKey = null;
+    for (const k in PAGES) {
+      if (k === stem || k.endsWith('/' + stem) || PAGES[k].path === 'wiki/' + clean) {
+        targetKey = k; break;
+      }
+    }
+    if (targetKey) {
+      return '<a href="#' + targetKey + '" onclick="navigate(\'' + targetKey + '\');return false;">' + label + '</a>';
+    }
+    return '<a class="missing-link" title="' + url + '">' + label + '</a>';
+  });
+  return text;
+}
+
+function renderMarkdown(md) {
+  const lines = md.replace(/\r\n/g, '\n').split('\n');
+  let html = '';
+  let i = 0;
+  let inList = false;
+
+  function closeList() { if (inList) { html += '</ul>'; inList = false; } }
+
+  while (i < lines.length) {
+    const line = lines[i];
+
+    if (/^\s*$/.test(line)) { closeList(); i++; continue; }
+
+    if (/^#{1,6}\s/.test(line)) {
+      closeList();
+      const m = line.match(/^(#{1,6})\s+(.*)$/);
+      const level = m[1].length;
+      html += '<h' + level + '>' + inline(m[2]) + '</h' + level + '>';
+      i++; continue;
+    }
+
+    if (/^-{3,}\s*$/.test(line)) {
+      closeList();
+      html += '<hr>';
+      i++; continue;
+    }
+
+    if (/^\|/.test(line) && i + 1 < lines.length && /^\|?[\s:|-]+\|[\s:|-]*$/.test(lines[i+1])) {
+      closeList();
+      const headerCells = line.split('|').map(s => s.trim()).filter((s,idx,arr) => !(idx===0 && s==='') && !(idx===arr.length-1 && s===''));
+      let bodyRows = [];
+      let j = i + 2;
+      while (j < lines.length && /^\|/.test(lines[j])) {
+        const cells = lines[j].split('|').map(s => s.trim()).filter((s,idx,arr) => !(idx===0 && s==='') && !(idx===arr.length-1 && s===''));
+        bodyRows.push(cells);
+        j++;
+      }
+      html += '<table><thead><tr>' + headerCells.map(c => '<th>' + inline(c) + '</th>').join('') + '</tr></thead><tbody>';
+      for (const row of bodyRows) {
+        html += '<tr>' + row.map(c => '<td>' + inline(c) + '</td>').join('') + '</tr>';
+      }
+      html += '</tbody></table>';
+      i = j; continue;
+    }
+
+    if (/^-\s+/.test(line)) {
+      if (!inList) { html += '<ul>'; inList = true; }
+      html += '<li>' + inline(line.replace(/^-\s+/, '')) + '</li>';
+      i++; continue;
+    }
+
+    closeList();
+    let para = line;
+    let k = i + 1;
+    while (k < lines.length && !/^\s*$/.test(lines[k]) && !/^#{1,6}\s/.test(lines[k]) && !/^-\s+/.test(lines[k]) && !/^-{3,}\s*$/.test(lines[k]) && !/^\|/.test(lines[k])) {
+      para += ' ' + lines[k];
+      k++;
+    }
+    html += '<p>' + inline(para) + '</p>';
+    i = k;
+  }
+  closeList();
+  return html;
+}
+
+function buildNavMeta() {
+  const metaKeys = ['home', 'log', 'about'];
+  const labels = { home: '📖 Wiki Index', log: '🕘 Recent Activity (Log)', about: '⚙ About / Schema' };
+  const el = document.getElementById('nav-meta');
+  el.innerHTML = metaKeys.map(k => '<a href="#' + k + '" onclick="navigate(\'' + k + '\');return false;">' + labels[k] + '</a>').join('');
+}
+
+function renderNav(filter) {
+  filter = (filter || '').toLowerCase();
+  const container = document.getElementById('nav-categories');
+  let out = '';
+  for (const cat of CATEGORY_ORDER) {
+    const items = Object.keys(PAGES).filter(k => PAGES[k].category === cat);
+    if (items.length === 0) continue;
+    const visible = items.filter(k => !filter || PAGES[k].title.toLowerCase().includes(filter));
+    if (filter && visible.length === 0) continue;
+    out += '<details class="nav-category" ' + (filter ? 'open' : 'open') + '><summary>' + CATEGORY_LABELS[cat] + ' (' + items.length + ')</summary><ul>';
+    for (const k of (filter ? visible : items)) {
+      out += '<li><a href="#' + k + '" data-key="' + k + '" onclick="navigate(\'' + k + '\');return false;">' + PAGES[k].title + '</a></li>';
+    }
+    out += '</ul></details>';
+  }
+  container.innerHTML = out;
+  highlightActive();
+}
+
+let currentKey = null;
+
+function highlightActive() {
+  document.querySelectorAll('.nav-category li a').forEach(a => {
+    a.classList.toggle('active', a.getAttribute('data-key') === currentKey);
+  });
+}
+
+function navigate(key) {
+  if (!PAGES[key]) {
+    document.getElementById('content-wrap').innerHTML = '<p class="not-found">Page not found: ' + escapeHtml(key) + '</p>';
+    return;
+  }
+  currentKey = key;
+  const page = PAGES[key];
+  const wrap = document.getElementById('content-wrap');
+  const catLabel = CATEGORY_LABELS[page.category] || 'Meta';
+  wrap.innerHTML =
+    '<div class="page-category-tag">' + catLabel + '</div>' +
+    '<div class="page-path">' + page.path + '</div>' +
+    '<article>' + renderMarkdown(page.raw) + '</article>';
+  window.scrollTo(0, 0);
+  document.getElementById('main').scrollTo(0, 0);
+  location.hash = key;
+  highlightActive();
+  document.getElementById('sidebar').classList.remove('open');
+  document.title = page.title + ' — Nina Powell Brand Wiki';
+}
+
+buildNavMeta();
+renderNav('');
+const initial = location.hash ? location.hash.slice(1) : 'home';
+navigate(PAGES[initial] ? initial : 'home');
+
+window.addEventListener('hashchange', () => {
+  const k = location.hash.slice(1);
+  if (k && PAGES[k]) navigate(k);
+});
+</script>
+</body>
+</html>
