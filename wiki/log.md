@@ -1,0 +1,11 @@
+# Wiki Log
+
+Append-only. One entry per ingest, query, or lint pass:
+
+`## [YYYY-MM-DD] ingest|query|lint | <source or question> | Updated: article-a, article-b`
+
+## [2026-10-18] setup | Initial scaffold created from Brand Wiki pattern doc | Updated: none yet
+## [2026-10-18] ingest | market-intelligence-2026-10-16.md + ai-brand-system-prompt-pack-2026-10-16.md (filed to raw/research/) | Updated: identity/brand-core, audience/icp-primary, audience/congregation-points, market/competitive-landscape, offers/the-unhinged-reclamation, voice/voice-guide, strategy/content-hooks, strategy/visual-brand-system
+## [2026-10-18] ingest | market-intelligence-2026-10-18.md + ai-brand-system-prompt-pack-2026-10-18.md (filed to raw/research/) | Updated: identity/brand-core, audience/icp-primary, audience/congregation-points, market/competitive-landscape, offers/the-sovereign-somaticist (new), offers/the-unhinged-reclamation (marked superseded), voice/voice-guide, strategy/content-hooks, strategy/visual-brand-system — CONTRADICTION: 10-18 source replaces brand name ("Unhinged Reclamation" → "Sovereign Reset"/"Sovereign Somaticist"), method name, tone, audience framing (midlife-numbness → eldest-daughter/sovereignty), congregation points, and competitors wholesale rather than incrementally. Resolved in favor of 10-18 per recency rule; 10-16 material kept as superseded/historical only.
+## [2026-10-18] ingest | Testimonials folder (Client Testimonials 2019.docx.md, Testimonal for YPP.docx.md, S Testimonial.pdf filed to raw/testimonials/; Case Study 1 - Sonia.mp4, Lindsay retreat part.mov, Amanda.m4a filed but NOT transcribed — no audio/video tool available this session) | Updated: proof/testimonials (new), audience/icp-primary (added real-client demographic cross-check) | Note: consent-to-publish status varies per client — see consent table in proof/testimonials.md before any external use.
+## [2026-10-18] query | Rebecca confirmed "midlife" is correct for the ICP, responding to the real-client-data flag above | Updated: audience/icp-primary (midlife attribute restored as human-confirmed, overriding prior recency-based removal; flagged that congregation-points/competitive-landscape haven't been re-checked against this)

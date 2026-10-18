@@ -1,0 +1,7 @@
+.env
+
+# too large for GitHub's 100MB per-file limit — kept locally only
+raw/testimonials/Case Study 1 - Sonia.mp4
+raw/testimonials/Lindsay retreat part.mov
+
+.DS_Store
